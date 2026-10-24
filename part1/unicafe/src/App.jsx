@@ -15,7 +15,10 @@ const Feedback = ({feedback}) => (
 )
 
 const StatisticsLine = ({text, value}) => (
-    <p>{text} {value}</p>
+    <tr>
+        <td>{text}</td> 
+        <td>{value}</td>
+    </tr>
 )
 
 const Statistics = ({statistics: {good, neutral, bad}}) => {
@@ -32,14 +35,14 @@ const Statistics = ({statistics: {good, neutral, bad}}) => {
     const positive_percent = (good / total) * 100
     
     return (
-        <div>
+        <table>
             <StatisticsLine text='good' value={good} />
             <StatisticsLine text='neutral' value={neutral} />
             <StatisticsLine text='bad' value={bad} />
             <StatisticsLine text='all' value={total} />
             <StatisticsLine text='average' value={average} />
             <StatisticsLine text='positive' value={positive_percent + '%'} />
-        </div>
+        </table>
     )
 }
 
