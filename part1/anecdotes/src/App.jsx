@@ -1,6 +1,16 @@
 
 import { useState } from 'react'
 
+const Anecdote = ({anecdote, vote}) => (
+  <>
+    <p>
+      {anecdote}
+    </p>
+    <p>
+      has {vote} votes
+    </p>
+  </>
+)
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -17,6 +27,9 @@ const App = () => {
   const getRandIdx = () => Math.floor(Math.random() * anecdotes.length);
   const [selected, setSelected] = useState(getRandIdx())
 
+  const maxVote = Math.max(...votes);
+  const maxVoteIdx = votes.indexOf(maxVote); 
+
   const setRandIdx = () => {
     const nextIdx = getRandIdx();
     setSelected(nextIdx);
@@ -28,16 +41,14 @@ const App = () => {
   }  
 
   return (
-    <div>
-      <p>
-        {anecdotes[selected]}
-      </p>
-      <p>
-        has {votes[selected]} votes
-      </p>
+    <>
+      <h1>Anecdote of the day</h1>
+      <Anecdote anecdote={anecdotes[selected]} vote={votes[selected]} />
       <button onClick={incrVotes}>vote</button>
       <button onClick={setRandIdx}>next anecdote</button>
-    </div>
+      <h1>Anecdote with most votes</h1>
+      <Anecdote anecdote={anecdotes[maxVoteIdx]} vote={maxVote} />
+    </>
   )
 }
 
