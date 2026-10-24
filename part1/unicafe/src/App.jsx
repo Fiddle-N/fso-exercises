@@ -19,16 +19,26 @@ const StatisticsLine = ({type, statistic}) => (
     <p>{type} {statistic}</p>
 )
 
-const Statistics = ({statistics: {good, neutral, bad}}) => (
-    <>
-        <h1>statistics</h1>
-        <div>
-            <StatisticsLine type='good' statistic={good} />
-            <StatisticsLine type='neutral' statistic={neutral} />
-            <StatisticsLine type='bad' statistic={bad} />
-        </div>
-    </>
-)
+const Statistics = ({statistics: {good, neutral, bad}}) => {
+    const total = good + neutral + bad
+    const weighted_stats = good - bad
+    const average = weighted_stats / total
+    const positive_percent = (good / total) * 100
+    
+    return (
+        <>
+            <h1>statistics</h1>
+            <div>
+                <StatisticsLine type='good' statistic={good} />
+                <StatisticsLine type='neutral' statistic={neutral} />
+                <StatisticsLine type='bad' statistic={bad} />
+                <StatisticsLine type='all' statistic={total} />
+                <StatisticsLine type='average' statistic={average} />
+                <StatisticsLine type='positive' statistic={positive_percent + '%'} />
+            </div>
+        </>
+    )
+}
 
 const App = () => {
   // save clicks of each button to its own state
