@@ -6,7 +6,6 @@ const Button = ({type, onClick}) => (
 
 const Feedback = ({feedback}) => (
     <>
-        <h1>give feedback</h1>
         <div>
             <Button type='good' onClick={feedback.setGood} />
             <Button type='neutral' onClick={feedback.setNeutral} />
@@ -21,22 +20,26 @@ const StatisticsLine = ({type, statistic}) => (
 
 const Statistics = ({statistics: {good, neutral, bad}}) => {
     const total = good + neutral + bad
+
+    if (total === 0) {
+        return (
+            <p>No feedback given</p>
+        )
+    }
+
     const weighted_stats = good - bad
     const average = weighted_stats / total
     const positive_percent = (good / total) * 100
     
     return (
-        <>
-            <h1>statistics</h1>
-            <div>
-                <StatisticsLine type='good' statistic={good} />
-                <StatisticsLine type='neutral' statistic={neutral} />
-                <StatisticsLine type='bad' statistic={bad} />
-                <StatisticsLine type='all' statistic={total} />
-                <StatisticsLine type='average' statistic={average} />
-                <StatisticsLine type='positive' statistic={positive_percent + '%'} />
-            </div>
-        </>
+        <div>
+            <StatisticsLine type='good' statistic={good} />
+            <StatisticsLine type='neutral' statistic={neutral} />
+            <StatisticsLine type='bad' statistic={bad} />
+            <StatisticsLine type='all' statistic={total} />
+            <StatisticsLine type='average' statistic={average} />
+            <StatisticsLine type='positive' statistic={positive_percent + '%'} />
+        </div>
     )
 }
 
@@ -59,7 +62,9 @@ const App = () => {
 
   return (
     <div>
+        <h1>give feedback</h1>
         <Feedback feedback={setFeedback} />
+        <h1>statistics</h1>
         <Statistics statistics={feedback} />
     </div>
   )
