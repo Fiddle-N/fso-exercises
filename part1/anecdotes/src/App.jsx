@@ -13,11 +13,30 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
    
-  const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
+  const getRandIdx = () => Math.floor(Math.random() * anecdotes.length);
+  const [selected, setSelected] = useState(getRandIdx())
+
+  const setRandIdx = () => {
+    const nextIdx = getRandIdx();
+    setSelected(nextIdx);
+  }
+  const incrVotes = () => {
+    const voteCopy = [...votes]
+    voteCopy[selected] += 1     
+    setVotes(voteCopy)
+  }  
 
   return (
     <div>
-      {anecdotes[selected]}
+      <p>
+        {anecdotes[selected]}
+      </p>
+      <p>
+        has {votes[selected]} votes
+      </p>
+      <button onClick={incrVotes}>vote</button>
+      <button onClick={setRandIdx}>next anecdote</button>
     </div>
   )
 }
