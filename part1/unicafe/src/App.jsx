@@ -1,21 +1,21 @@
 import { useState } from 'react'
 
-const Button = ({type, onClick}) => (
-    <button onClick={onClick}>{type}</button>
+const Button = ({text, onClick}) => (
+    <button onClick={onClick}>{text}</button>
 )
 
 const Feedback = ({feedback}) => (
     <>
         <div>
-            <Button type='good' onClick={feedback.setGood} />
-            <Button type='neutral' onClick={feedback.setNeutral} />
-            <Button type='bad' onClick={feedback.setBad} />
+            <Button text='good' onClick={feedback.setGood} />
+            <Button text='neutral' onClick={feedback.setNeutral} />
+            <Button text='bad' onClick={feedback.setBad} />
         </div>
     </>
 )
 
-const StatisticsLine = ({type, statistic}) => (
-    <p>{type} {statistic}</p>
+const StatisticsLine = ({text, value}) => (
+    <p>{text} {value}</p>
 )
 
 const Statistics = ({statistics: {good, neutral, bad}}) => {
@@ -33,12 +33,12 @@ const Statistics = ({statistics: {good, neutral, bad}}) => {
     
     return (
         <div>
-            <StatisticsLine type='good' statistic={good} />
-            <StatisticsLine type='neutral' statistic={neutral} />
-            <StatisticsLine type='bad' statistic={bad} />
-            <StatisticsLine type='all' statistic={total} />
-            <StatisticsLine type='average' statistic={average} />
-            <StatisticsLine type='positive' statistic={positive_percent + '%'} />
+            <StatisticsLine text='good' value={good} />
+            <StatisticsLine text='neutral' value={neutral} />
+            <StatisticsLine text='bad' value={bad} />
+            <StatisticsLine text='all' value={total} />
+            <StatisticsLine text='average' value={average} />
+            <StatisticsLine text='positive' value={positive_percent + '%'} />
         </div>
     )
 }
