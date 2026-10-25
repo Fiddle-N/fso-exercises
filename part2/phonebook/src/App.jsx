@@ -13,7 +13,7 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault()
-    if (persons.some((person) => person.name === newName)) {
+    if (persons.some(person => person.name === newName)) {
       alert(`${newName} is already added to phonebook`)
       return
     }
@@ -25,7 +25,7 @@ const App = () => {
     setNewNumber('')
   } 
 
-  const handleChange = (setFn) => (event) => {
+  const handleChange = setFn => event => {
     setFn(event.target.value)
   }
 
@@ -61,7 +61,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {personsToShow.map((person) =>  
+      {personsToShow.map(person =>  
         <div key={person.id}>{person.name} {person.number}</div>
       )}
     </div>
