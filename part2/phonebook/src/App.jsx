@@ -18,12 +18,8 @@ const App = () => {
     setNewNumber('')
   } 
 
-  const handleNameChange = (event) => {
-    setNewName(event.target.value)
-  }
-
-  const handleNumberChange = (event) => {
-    setNewNumber(event.target.value)
+  const handleChange = (setFn) => (event) => {
+    setFn(event.target.value)
   }
 
   return (
@@ -33,13 +29,13 @@ const App = () => {
         <div>
           name: <input 
             value={newName}  
-            onChange={handleNameChange}
+            onChange={handleChange(setNewName)}
             />
         </div>
         <div>
           number: <input 
             value={newNumber}  
-            onChange={handleNumberChange}
+            onChange={handleChange(setNewNumber)}
             />
         </div>
         <div>
